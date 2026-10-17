@@ -46,20 +46,8 @@ We help scale our products so teams can work effectively in any type of business
 
 Our products are built using the following programming languages and technologies, dynamically updated from our GitHub repositories:
 
-<div align="left">
-  <img src="https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white" alt="HTML5" />
-  <img src="https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white" alt="CSS3" />
-  <img src="https://img.shields.io/badge/-Markdown-000000?logo=markdown&logoColor=white" alt="Markdown" />
-  <img src="https://img.shields.io/badge/-JSON-000000?logo=json&logoColor=white" alt="JSON" />
-  <img src="https://img.shields.io/badge/-YAML-CB171E?logo=yaml&logoColor=white" alt="YAML" />
-  <img src="https://img.shields.io/badge/-Next.js-000000?logo=next.js&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=black" alt="React" />
-  <img src="https://img.shields.io/badge/-Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/-Bun-000000?logo=bun&logoColor=white" alt="Bun" />
-  <img src="https://img.shields.io/badge/-Node.js-339933?logo=nodedotjs&logoColor=white" alt="Node.js" />
-</div>
+<!-- TECH-STACK-START -->
+<!-- TECH-STACK-END -->
 
 ## Code Statistics
 
