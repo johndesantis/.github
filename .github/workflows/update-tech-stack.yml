@@ -76,13 +76,13 @@ jobs:
               'YAML': 'CB171E', 'JSON': '000000', 'Markdown': '000000',
               'Vue': '4FC08D', 'Svelte': 'FF3E00', 'Dart': '0175C2',
               'Lua': '000080', 'R': '276DC3', 'Scala': 'DC322F', 'Elixir': '4E2A8E',
-              'Haskell': '5E5086', 'Perl': '39457E', 'Objective-C': '438EFF',
+              'Haskell': '5E5086', 'Perl': '39457E',
           }
 
           logo_map = {
               'TypeScript': 'typescript', 'JavaScript': 'javascript', 'Python': 'python',
               'Go': 'go', 'Rust': 'rust', 'Java': 'java', 'C': 'c', 'C++': 'cplusplus',
-              'C#': 'csharp', 'Ruby': 'ruby', 'PHP': 'php', 'Swift': 'swift',
+              'Ruby': 'ruby', 'PHP': 'php', 'Swift': 'swift',
               'Kotlin': 'kotlin', 'HTML': 'html5', 'CSS': 'css3', 'SCSS': 'sass',
               'Shell': 'gnubash', 'Dockerfile': 'docker', 'YAML': 'yaml', 'JSON': 'json',
               'Markdown': 'markdown', 'Vue': 'vuejs', 'Svelte': 'svelte', 'Dart': 'dart',
@@ -90,21 +90,21 @@ jobs:
               'Haskell': 'haskell', 'Perl': 'perl',
           }
 
-def logo(lang):
-               slug = logo_map.get(lang)
-               if slug is None:
-                   return ''
-               return slug
+          def logo(lang):
+              slug = logo_map.get(lang)
+              if slug is None:
+                  return ''
+              return slug
 
-badges = []
-           for lang, count in sorted(lang_bytes.items(), key=lambda x: -x[1]):
-               color = colors.get(lang, '858585')
-               lg = logo(lang)
-               if lg:
-                   badge = f'<img src="https://img.shields.io/badge/-{urllib.parse.quote(lang)}-{color}?logo={lg}&logoColor=white" alt="{lang}" />'
-               else:
-                   badge = f'<img src="https://img.shields.io/badge/-{urllib.parse.quote(lang)}-{color}" alt="{lang}" />'
-               badges.append(badge)
+          badges = []
+          for lang, count in sorted(lang_bytes.items(), key=lambda x: -x[1]):
+              color = colors.get(lang, '858585')
+              lg = logo(lang)
+              if lg:
+                  badge = f'<img src="https://img.shields.io/badge/-{urllib.parse.quote(lang)}-{color}?logo={lg}&logoColor=white" alt="{lang}" />'
+              else:
+                  badge = f'<img src="https://img.shields.io/badge/-{urllib.parse.quote(lang)}-{color}" alt="{lang}" />'
+              badges.append(badge)
 
           block = '<div align="left">\n  ' + '\n  '.join(badges) + '\n</div>'
 
