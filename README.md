@@ -53,41 +53,8 @@ Our products are built using the following programming languages and technologie
 
 An animated continuous dashboard showing real-time metrics from https://github.com/LoBot-LLC
 
-<div align="left">
-
-<!-- Organization Followers -->
-<a href="https://github.com/orgs/LoBot-LLC/people">
-  <img src="https://img.shields.io/github/followers/LoBot-LLC?style=social&logo=github&color=blue&label=Followers" alt="Organization Followers" />
-</a>
-
-<!-- Total Commits -->
-<a href="https://github.com/LoBot-LLC/TecnoIndicator/commits/main">
-  <img src="https://img.shields.io/github/commit-activity/y/LoBot-LLC/TecnoIndicator?logo=git&color=green&label=Commits%20(last%20year)" alt="Total Commits" />
-</a>
-
-<!-- Most Active Repository -->
-<a href="https://github.com/orgs/LoBot-LLC/repositories?q=TecnoIndicator&type=all&sort=pushed&direction=desc">
-  <img src="https://img.shields.io/github/repo-size/LoBot-LLC/TecnoIndicator?logo=github&color=purple&label=Most%20Active%20Repo" alt="Most Active Repository" />
-</a>
-
-<!-- Most Used Language -->
-<a href="https://github.com/orgs/LoBot-LLC/repositories?q=TecnoIndicator&type=all&sort=pushed&direction=desc">
-  <img src="https://img.shields.io/github/languages/top/LoBot-LLC/TecnoIndicator?logo=typescript&logoColor=white&color=3178c6&label=Most%20Used%20Language" alt="Most Used Language" />
-</a>
-
-<!-- Total Pull Requests -->
-<a href="https://github.com/LoBot-LLC/TecnoIndicator/pulls">
-  <img src="https://img.shields.io/github/issues-pr/LoBot-LLC/TecnoIndicator?logo=github&color=orange&label=Total%20PRs" alt="Total Pull Requests" />
-</a>
-
-<!-- Total Open Issues -->
-<a href="https://github.com/LoBot-LLC/TecnoIndicator/issues">
-  <img src="https://img.shields.io/github/issues/LoBot-LLC/TecnoIndicator?logo=github&color=red&label=Open%20Issues" alt="Total Open Issues" />
-</a>
-
-</div>
-
-*Statistics update continuously from https://github.com/LoBot-LLC*
+<!-- CODE-STATS-START -->
+<!-- CODE-STATS-END -->
 
 ## Repository Overview
 
