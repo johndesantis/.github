@@ -1,4 +1,4 @@
-name: Update Technology Stack
+name: Update Technology Stack and Code Statistics
 
 on:
   schedule:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  update-tech-stack:
+  update-metrics:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Update README tech stack
+      - name: Update README with tech stack and code statistics
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -54,23 +54,69 @@ jobs:
                   page += 1
               return results
 
+          # Get organization info for followers
+          org_info = api(f'/orgs/{org}')
+          total_followers = org_info.get('followers', 0)
+
+          # Get all repositories
           repos = api_paginated(f'/orgs/{org}/repos')
 
+          # Initialize counters
           lang_bytes = {}
+          total_commits = 0
+          most_active_repo = None
+          most_active_commits = 0
+          total_prs = 0
+          total_issues = 0
+
+          # Process each repository
           for repo in repos:
               if repo.get('fork') or repo.get('archived'):
                   continue
+              
+              repo_name = repo['name']
+              
+              # Get languages
               try:
-                  langs = api(f"/repos/{org}/{repo['name']}/languages")
+                  langs = api(f"/repos/{org}/{repo_name}/languages")
+                  for lang, count in langs.items():
+                      lang_bytes[lang] = lang_bytes.get(lang, 0) + count
               except Exception:
-                  continue
-              for lang, count in langs.items():
-                  lang_bytes[lang] = lang_bytes.get(lang, 0) + count
+                  pass
+              
+              # Get commit count
+              try:
+                  commits = api_paginated(f"/repos/{org}/{repo_name}/commits")
+                  commit_count = len(commits)
+                  total_commits += commit_count
+                  if commit_count > most_active_commits:
+                      most_active_commits = commit_count
+                      most_active_repo = repo_name
+              except Exception:
+                  pass
+              
+              # Get PR count (all states)
+              try:
+                  prs = api_paginated(f"/repos/{org}/{repo_name}/pulls?state=all")
+                  pr_count = len(prs)
+                  total_prs += pr_count
+              except Exception:
+                  pass
+              
+              # Get issue count (open only, excluding PRs)
+              try:
+                  issues = api_paginated(f"/repos/{org}/{repo_name}/issues?state=open")
+                  # Filter out PRs (GitHub API returns PRs in the issues endpoint)
+                  issue_count = len([issue for issue in issues if 'pull_request' not in issue])
+                  total_issues += issue_count
+              except Exception:
+                  pass
 
+          # Colors for badges
           colors = {
               'TypeScript': '3178C6', 'JavaScript': 'F7DF1E', 'Python': '3776AB',
               'Go': '00ADD8', 'Rust': 'DEA584', 'Java': 'ED8B00', 'C': '555555',
-              'C++': 'F34B7D', 'C#': '178600', 'Ruby': 'CC342D', 'PHP': '777BB4',
+              'C++': 'F34B7D', 'Ruby': 'CC342D', 'PHP': '777BB4',
               'Swift': 'F05138', 'Kotlin': 'A97BFF', 'HTML': 'E34F26',
               'CSS': '1572B6', 'SCSS': 'C6538C', 'Shell': '89E051', 'Dockerfile': '384D54',
               'YAML': 'CB171E', 'JSON': '000000', 'Markdown': '000000',
@@ -79,6 +125,7 @@ jobs:
               'Haskell': '5E5086', 'Perl': '39457E',
           }
 
+          # Logo mapping for shields.io (simple-icons slugs)
           logo_map = {
               'TypeScript': 'typescript', 'JavaScript': 'javascript', 'Python': 'python',
               'Go': 'go', 'Rust': 'rust', 'Java': 'java', 'C': 'c', 'C++': 'cplusplus',
@@ -90,34 +137,84 @@ jobs:
               'Haskell': 'haskell', 'Perl': 'perl',
           }
 
-          def logo(lang):
-              slug = logo_map.get(lang)
-              if slug is None:
-                  return ''
-              return slug
+          def get_logo(lang):
+              return logo_map.get(lang, '')
 
-          badges = []
+          # Generate technology stack badges
+          tech_badges = []
           for lang, count in sorted(lang_bytes.items(), key=lambda x: -x[1]):
               color = colors.get(lang, '858585')
-              lg = logo(lang)
+              lg = get_logo(lang)
               if lg:
                   badge = f'<img src="https://img.shields.io/badge/-{urllib.parse.quote(lang)}-{color}?logo={lg}&logoColor=white" alt="{lang}" />'
               else:
                   badge = f'<img src="https://img.shields.io/badge/-{urllib.parse.quote(lang)}-{color}" alt="{lang}" />'
-              badges.append(badge)
+              tech_badges.append(badge)
 
-          block = '<div align="left">\n  ' + '\n  '.join(badges) + '\n</div>'
+          tech_block = '<div align="left">\n  ' + '\n  '.join(tech_badges) + '\n</div>'
 
+          # Generate code statistics badges
+          stats_badges = []
+
+          # Organization Followers
+          stats_badges.append(f'<a href="https://github.com/orgs/{org}/people">')
+          stats_badges.append(f'  <img src="https://img.shields.io/github/followers/{org}?style=social&logo=github&color=blue&label=Followers" alt="Organization Followers" />')
+          stats_badges.append(f'</a>')
+
+          # Total Commits
+          stats_badges.append(f'<a href="https://github.com/{org}?tab=repositories">')
+          stats_badges.append(f'  <img src="https://img.shields.io/badge/Total%20Commits-{total_commits}-lightgrey" alt="Total Commits" />')
+          stats_badges.append(f'</a>')
+
+          # Most Active Repository
+          if most_active_repo:
+              stats_badges.append(f'<a href="https://github.com/{org}/{most_active_repo}">')
+              stats_badges.append(f'  <img src="https://img.shields.io/badge/Most%20Active-{most_active_repo}-purple" alt="Most Active Repository" />')
+              stats_badges.append(f'</a>')
+
+          # Most Used Language
+          if lang_bytes:
+              most_used_lang = max(lang_bytes.items(), key=lambda x: x[1])[0]
+              color = colors.get(most_used_lang, '858585')
+              lg = get_logo(most_used_lang)
+              if lg:
+                  stats_badges.append(f'<a href="https://github.com/{org}?tab=repositories&q=&type=source&language={urllib.parse.quote(most_used_lang)}">')
+                  stats_badges.append(f'  <img src="https://img.shields.io/badge/-{urllib.parse.quote(most_used_lang)}-{color}?logo={lg}&logoColor=white" alt="{most_used_lang}" />')
+                  stats_badges.append(f'</a>')
+              else:
+                  stats_badges.append(f'<a href="https://github.com/{org}?tab=repositories&q=&type=source&language={urllib.parse.quote(most_used_lang)}">')
+                  stats_badges.append(f'  <img src="https://img.shields.io/badge/-{urllib.parse.quote(most_used_lang)}-{color}" alt="{most_used_lang}" />')
+                  stats_badges.append(f'</a>')
+
+          # Total Pull Requests
+          stats_badges.append(f'<a href="https://github.com/{org}?tab=repositories&q=&type=source">')
+          stats_badges.append(f'  <img src="https://img.shields.io/badge/Total%20PRs-{total_prs}-orange" alt="Total Pull Requests" />')
+          stats_badges.append(f'</a>')
+
+          # Total Open Issues
+          stats_badges.append(f'<a href="https://github.com/{org}?tab=issues&q=is%3Aopen+is%3Aissue">')
+          stats_badges.append(f'  <img src="https://img.shields.io/badge/Open%20Issues-{total_issues}-red" alt="Total Open Issues" />')
+          stats_badges.append(f'</a>')
+
+          stats_block = '<div align="left">\n  ' + '\n  '.join(stats_badges) + '\n</div>'
+
+          # Read and update README
           with open('README.md') as f:
               content = f.read()
 
-          pattern = re.compile(r'<!-- TECH-STACK-START -->.*?<!-- TECH-STACK-END -->', re.DOTALL)
-          new_content = pattern.sub(f'<!-- TECH-STACK-START -->\n{block}\n<!-- TECH-STACK-END -->', content)
+          # Update Technology Stack section
+          tech_pattern = re.compile(r'<!-- TECH-STACK-START -->.*?<!-- TECH-STACK-END -->', re.DOTALL)
+          content = tech_pattern.sub(f'<!-- TECH-STACK-START -->\n{tech_block}\n<!-- TECH-STACK-END -->', content)
+
+          # Update Code Statistics section
+          stats_pattern = re.compile(r'<!-- CODE-STATS-START -->.*?<!-- CODE-STATS-END -->', re.DOTALL)
+          content = stats_pattern.sub(f'<!-- CODE-STATS-START -->\n{stats_block}\n<!-- CODE-STATS-END -->', content)
 
           with open('README.md', 'w') as f:
-              f.write(new_content)
+              f.write(content)
 
-          print(f'Updated with {len(badges)} languages')
+          print(f'Updated tech stack with {len(tech_badges)} languages')
+          print(f'Updated code statistics: {total_followers} followers, {total_commits} commits, {total_prs} PRs, {total_issues} issues')
           PYEOF
 
       - name: Commit and push
@@ -128,6 +225,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes"
           else
-            git commit -m "chore: update technology stack badges"
+            git commit -m "chore: update technology stack and code statistics"
             git push
           fi
