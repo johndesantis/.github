@@ -47,6 +47,14 @@ We help scale our products so teams can work effectively in any type of business
 Our products are built using the following programming languages and technologies, dynamically updated from our GitHub repositories:
 
 <!-- TECH-STACK-START -->
+<div align="left">
+  <img src="https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white&label=" alt="TypeScript" height="22" />
+  <img src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=white&label=" alt="JavaScript" height="22" />
+  <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white&label=" alt="Python" height="22" />
+  <img src="https://img.shields.io/badge/-Go-00ADD8?style=flat&logo=go&logoColor=white&label=" alt="Go" height="22" />
+  <img src="https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=css3&logoColor=white&label=" alt="CSS" height="22" />
+  <img src="https://img.shields.io/badge/-HTML-E34D26?style=flat&logo=html5&logoColor=white&label=" alt="HTML" height="22" />
+</div>
 <!-- TECH-STACK-END -->
 
 ## Code Statistics
@@ -54,41 +62,18 @@ Our products are built using the following programming languages and technologie
 An animated continuous dashboard showing real-time metrics from https://github.com/LoBot-LLC
 
 <!-- CODE-STATS-START -->
+<p align="center">
+  <img src="docs/code-stats.svg" alt="Live Code Statistics dashboard for LoBot-LLC" width="920" height="640" />
+</p>
+
+<div align="center">
+
+Real-time metrics fetched live from <a href="https://github.com/LoBot-LLC">github.com/LoBot-LLC</a> via the <code>DASHBOARD_API</code> secret. Values are refreshed automatically by the scheduled GitHub Actions workflow.
+
+</div>
 <!-- CODE-STATS-END -->
 
-## Repository Overview
-
-<table>
-  <tr>
-    <td><b>Repository</b></td>
-    <td><b>Description</b></td>
-    <td><b>Language</b></td>
-    <td><b>Stars</b></td>
-    <td><b>Forks</b></td>
-    <td><b>Issues</b></td>
-    <td><b>PRs</b></td>
-  </tr>
-  <tr>
-    <td><a href="https://github.com/LoBot-LLC/TecnoIndicator">TecnoIndicator</a></td>
-    <td>The most reliable website to predict real-time oil and electricity prices</td>
-    <td>TypeScript</td>
-    <td><img src="https://img.shields.io/github/stars/LoBot-LLC/TecnoIndicator?style=flat&color=yellow" alt="Stars" /></td>
-    <td><img src="https://img.shields.io/github/forks/LoBot-LLC/TecnoIndicator?style=flat&color=blue" alt="Forks" /></td>
-    <td><img src="https://img.shields.io/github/issues/LoBot-LLC/TecnoIndicator?style=flat&color=red" alt="Issues" /></td>
-    <td><img src="https://img.shields.io/github/issues-pr/LoBot-LLC/TecnoIndicator?style=flat&color=orange" alt="PRs" /></td>
-  </tr>
-  <tr>
-    <td><a href="https://github.com/LoBot-LLC/.github">.github</a></td>
-    <td>Overall introduction to Lobot LLC startup</td>
-    <td>Markdown</td>
-    <td><img src="https://img.shields.io/github/stars/LoBot-LLC/.github?style=flat&color=yellow" alt="Stars" /></td>
-    <td><img src="https://img.shields.io/github/forks/LoBot-LLC/.github?style=flat&color=blue" alt="Forks" /></td>
-    <td><img src="https://img.shields.io/github/issues/LoBot-LLC/.github?style=flat&color=red" alt="Issues" /></td>
-    <td><img src="https://img.shields.io/github/issues-pr/LoBot-LLC/.github?style=flat&color=orange" alt="PRs" /></td>
-  </tr>
-</table>
-
-*All metrics are fetched live from https://github.com/LoBot-LLC and update automatically.*
+*Live metrics are fetched continuously from https://github.com/LoBot-LLC and refresh automatically via the scheduled GitHub Actions workflow (`.github/workflows/update-tech-stack.yml`). The animated dashboard is rendered to `docs/code-stats.svg` and embedded between the markers above; the technology stack is rebuilt dynamically from every organisation repository.*
 
 ## Get Involved
 
