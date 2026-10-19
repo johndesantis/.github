@@ -156,8 +156,11 @@ def _headers(token: str | None):
     return headers
 
 
-def _api_get_raw(url, token):
+def _api_get_raw(url, token, params=None):
     """GET *url*, returning (parsed_json, link_header)."""
+    if params:
+        qs = urlencode(params)
+        url = f"{url}{'&' if '?' in url else '?'}{qs}"
     req = urllib.request.Request(url, headers=_headers(token))
     with urllib.request.urlopen(req, timeout=30) as resp:
         body = resp.read().decode("utf-8", "replace")
@@ -204,7 +207,7 @@ def _get_paginated(url, token):
         url = _link_part(link, "next")
 
 
-def _paged_count(list_url: str, token) -> int:
+def _paged_count(list_url: str, token, params=None) -> int:
     """Approximate the size of a GitHub list endpoint using ``per_page=1``.
 
     GitHub replies with a ``Link`` header whose ``rel="last"`` page number is
@@ -213,6 +216,9 @@ def _paged_count(list_url: str, token) -> int:
     """
     sep = "&" if "?" in list_url else "?"
     full = f"{list_url}{sep}per_page=1"
+    if params:
+        qs = urlencode(params)
+        full = f"{full}{'&' if '?' in full else '?'}{qs}"
     try:
         data, link = _api_get_raw(full, token)
     except urllib.error.HTTPError:
@@ -245,7 +251,7 @@ def _repo_languages(repo_full: str, token) -> dict:
 def _token():
     return (
         os.environ.get("DASHBOARD_API")
-        or os.environ.get("GITHUB_TOKEN")
+        or os.environ.get("GH_TOKEN")
         or os.environ.get("GITHUB_TOKEN")
     )
 
@@ -284,10 +290,10 @@ def collect_metrics(token=None):
         total_commits += commit_count
 
         total_prs += _paged_count(
-            f"{API_BASE}/repos/{ORG}/{name}/pulls", {"state": "all"}, token
+            f"{API_BASE}/repos/{ORG}/{name}/pulls", token, {"state": "all"}
         )
         open_prs = _paged_count(
-            f"{API_BASE}/repos/{ORG}/{name}/pulls", {"state": "open"}, token
+            f"{API_BASE}/repos/{ORG}/{name}/pulls", token, {"state": "open"}
         )
         # open_issues_count = open issues + open PRs
         total_issues += max(
