@@ -50,10 +50,7 @@ Our products are built using the following programming languages and technologie
 <div align="left">
   <img src="https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white&label=" alt="TypeScript" height="22" />
   <img src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=white&label=" alt="JavaScript" height="22" />
-  <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white&label=" alt="Python" height="22" />
-  <img src="https://img.shields.io/badge/-Go-00ADD8?style=flat&logo=go&logoColor=white&label=" alt="Go" height="22" />
   <img src="https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=css3&logoColor=white&label=" alt="CSS" height="22" />
-  <img src="https://img.shields.io/badge/-HTML-E34D26?style=flat&logo=html5&logoColor=white&label=" alt="HTML" height="22" />
 </div>
 <!-- TECH-STACK-END -->
 
