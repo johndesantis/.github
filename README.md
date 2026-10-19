@@ -68,12 +68,9 @@ An animated continuous dashboard showing real-time metrics from https://github.c
 
 <div align="center">
 
-Real-time metrics fetched live from <a href="https://github.com/LoBot-LLC">github.com/LoBot-LLC</a> via the <code>DASHBOARD_API</code> secret. Values are refreshed automatically by the scheduled GitHub Actions workflow.
 
 </div>
 <!-- CODE-STATS-END -->
-
-*Live metrics are fetched continuously from https://github.com/LoBot-LLC and refresh automatically via the scheduled GitHub Actions workflow (`.github/workflows/update-tech-stack.yml`). The animated dashboard is rendered to `docs/code-stats.svg` and embedded between the markers above; the technology stack is rebuilt dynamically from every organisation repository.*
 
 ## Get Involved
 
