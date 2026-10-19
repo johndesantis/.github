@@ -2,7 +2,7 @@
 
 **Overall introduction to LoBot LLC startup**
 
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/555b8b22-d946-4707-b5ae-155f7d6d08c2" />
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/b8b1ec63-eb4c-4cfe-ad06-0ca6a5e98593" />
 
 ## About Us
 
@@ -19,6 +19,7 @@ We build robust solutions for small, medium-sized, and large-scale businesses to
 ### 2. AI-Powered Innovation with Open-Source Foundations
 
 We accelerate our products with cutting-edge AI tools and established open-source frameworks, including but not limited to:
+
 - **npm ecosystem** for package management and reusable components
 - **Next.js** for server-side, production-grade web applications
 - **JavaScript/TypeScript** as our primary languages
@@ -43,11 +44,36 @@ We help scale our products so teams can work effectively in any type of business
 
 ## Technology Stack
 
-Our products are built using modern web technologies and proven open-source frameworks:
-- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
-- **Backend**: Node.js, various Node ecosystem packages
-- **Runtime**: Bun for improved developer experience and performance
-- **AI Integration**: Custom AI tools and frameworks integrated with our products
+Our products are built using the following programming languages and technologies, dynamically updated from our GitHub repositories:
+
+<!-- TECH-STACK-START -->
+<div align="left">
+  <img src="https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white&label=" alt="TypeScript" height="22" />
+  <img src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=white&label=" alt="JavaScript" height="22" />
+  <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white&label=" alt="Python" height="22" />
+  <img src="https://img.shields.io/badge/-Go-00ADD8?style=flat&logo=go&logoColor=white&label=" alt="Go" height="22" />
+  <img src="https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=css3&logoColor=white&label=" alt="CSS" height="22" />
+  <img src="https://img.shields.io/badge/-HTML-E34D26?style=flat&logo=html5&logoColor=white&label=" alt="HTML" height="22" />
+</div>
+<!-- TECH-STACK-END -->
+
+## Code Statistics
+
+An animated continuous dashboard showing real-time metrics from https://github.com/LoBot-LLC
+
+<!-- CODE-STATS-START -->
+<p align="center">
+  <img src="docs/code-stats.svg" alt="Live Code Statistics dashboard for LoBot-LLC" width="920" height="640" />
+</p>
+
+<div align="center">
+
+Real-time metrics fetched live from <a href="https://github.com/LoBot-LLC">github.com/LoBot-LLC</a> via the <code>DASHBOARD_API</code> secret. Values are refreshed automatically by the scheduled GitHub Actions workflow.
+
+</div>
+<!-- CODE-STATS-END -->
+
+*Live metrics are fetched continuously from https://github.com/LoBot-LLC and refresh automatically via the scheduled GitHub Actions workflow (`.github/workflows/update-tech-stack.yml`). The animated dashboard is rendered to `docs/code-stats.svg` and embedded between the markers above; the technology stack is rebuilt dynamically from every organisation repository.*
 
 ## Get Involved
 
