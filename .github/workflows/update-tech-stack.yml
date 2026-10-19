@@ -26,3 +26,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python .github/scripts/update_readme.py
+
+      - name: Remove legacy .github/README.md
+        run: |
+          rm -f .github/README.md
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Update technology stack and code statistics" || echo "No changes to commit"
+          git push
