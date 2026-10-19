@@ -35,8 +35,8 @@ SVG_OUTPUT_PATH = REPO_ROOT / "docs" / "code-stats.svg"
 MOCK_METRICS = {
     "total_followers": 42,
     "total_commits": 81,
-    "most_active_repo": "TecnoIndicator",
-    "most_used_language": "TypeScript",
+    "total_stars": 124,
+    "total_forks": 37,
     "total_prs": 13,
     "total_issues": 5,
     "updated": "2026-10-17T16:00:00Z",
@@ -107,13 +107,13 @@ def test_render_code_stats_svg():
     assert '42' in svg_text
     assert 'Total Commits' in svg_text
     assert '81' in svg_text
-    assert 'Most Active Repo' in svg_text
-    assert 'TecnoIndicator' in svg_text
-    assert 'Most Used Language' in svg_text
-    assert 'TypeScript' in svg_text
+    assert 'Total Stars' in svg_text
+    assert '124' in svg_text
+    assert 'Total Forks' in svg_text
+    assert '37' in svg_text
     assert 'Total PRs' in svg_text
     assert '13' in svg_text
-    assert 'Open Issues' in svg_text
+    assert 'Active Issues' in svg_text
     assert '5' in svg_text
 
     # Must contain SMIL animation elements

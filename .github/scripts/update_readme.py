@@ -270,19 +270,18 @@ def collect_metrics(token=None):
     ]
 
     total_commits = 0
+    total_stars = 0
+    total_forks = 0
     total_prs = 0
     total_issues = 0
-    most_active_repo = None
-    most_active_commits = 0
-    lang_bytes: dict = {}
 
     for repo in repos:
         name = repo["name"]
+        total_stars += int(repo.get("stargazers_count", 0))
+        total_forks += int(repo.get("forks_count", 0))
+
         commit_count = _commit_count(f"{ORG}/{name}", token)
         total_commits += commit_count
-        if commit_count > most_active_commits:
-            most_active_commits = commit_count
-            most_active_repo = name
 
         total_prs += _paged_count(
             f"{API_BASE}/repos/{ORG}/{name}/pulls", {"state": "all"}, token
@@ -295,18 +294,11 @@ def collect_metrics(token=None):
             0, int(repo.get("open_issues_count", 0)) - open_prs
         )
 
-        for lang, count in _repo_languages(f"{ORG}/{name}", token).items():
-            lang_bytes[lang] = lang_bytes.get(lang, 0) + count
-
-    most_used_language = (
-        max(lang_bytes, key=lang_bytes.get) if lang_bytes else "N/A"
-    )
-
     return {
         "total_followers": total_followers,
         "total_commits": total_commits,
-        "most_active_repo": most_active_repo or "N/A",
-        "most_used_language": most_used_language,
+        "total_stars": total_stars,
+        "total_forks": total_forks,
         "total_prs": total_prs,
         "total_issues": total_issues,
         "updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -416,13 +408,13 @@ def render_code_stats_svg(metrics) -> str:
          "organisation members", ACCENTS[0]),
         ("Total Commits", _fmt_number(metrics["total_commits"]),
          "across all repos", ACCENTS[1]),
-        ("Most Active Repo", str(metrics["most_active_repo"]),
-         "by commit count", ACCENTS[2]),
-        ("Most Used Language", str(metrics["most_used_language"]),
-         "by bytes across repos", ACCENTS[3]),
+        ("Total Stars", _fmt_number(metrics["total_stars"]),
+         "across all repos", ACCENTS[2]),
+        ("Total Forks", _fmt_number(metrics["total_forks"]),
+         "across all repos", ACCENTS[3]),
         ("Total PRs", _fmt_number(metrics["total_prs"]),
          "open + closed", ACCENTS[4]),
-        ("Open Issues", _fmt_number(metrics["total_issues"]),
+        ("Active Issues", _fmt_number(metrics["total_issues"]),
          "active, not closed", ACCENTS[5]),
     ]
 
