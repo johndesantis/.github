@@ -99,7 +99,7 @@ def test_render_code_stats_svg():
     # Basic SVG structure
     assert svg_text.strip().startswith('<svg'), "SVG must start with <svg"
     assert svg_text.strip().endswith('</svg>'), "SVG must end with </svg>"
-    assert 'viewBox="0 0 920 640"' in svg_text, "Missing or wrong viewBox"
+    assert 'viewBox="0 0 920 800"' in svg_text, "Missing or wrong viewBox"
     assert 'xmlns="http://www.w3.org/2000/svg"' in svg_text, "Missing xmlns"
 
     # Must contain all 6 metric labels and values

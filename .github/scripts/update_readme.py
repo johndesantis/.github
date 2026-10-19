@@ -127,12 +127,13 @@ MUTED = "#8B949E"
 ACCENT = "#58A6FF"
 ACCENTS = ["#4578F7", "#58A6FF", "#7D64FF", "#F2CC60", "#F08839", "#F77D50"]
 
-SVG_W, SVG_H = 920, 640
+SVG_W, SVG_H = 920, 800
 CARD_W, CARD_H = 274, 200
 COLS, GAP = 3, 22
 START_X, START_Y = 40, 100
 FONT_STACK = "ui-monospace,SFMonoRegular,Consolas,Monaco,monospace"
 MAX_LANG_BADGES = 16
+FOOTER_Y = 780
 
 
 def _esc(value) -> str:
@@ -454,7 +455,7 @@ def render_code_stats_svg(metrics) -> str:
         )
 
     parts.append(
-        f'<text x="460" y="{SVG_H - 14}" text-anchor="middle" '
+        f'<text x="460" y="{FOOTER_Y}" text-anchor="middle" '
         f'font-family="{FONT_STACK}" font-size="11" fill="{MUTED}">'
         f'dashboard auto-refreshed by .github/workflows/update-tech-stack.yml '
         f'&#8209; data &amp; icons from GitHub REST API + simple-icons</text>'

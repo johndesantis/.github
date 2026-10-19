@@ -23,7 +23,7 @@ Our products are built using programming languages and technologies harvested dy
 
 <!-- CODE-STATS-START -->
 <p align="center">
-  <img src="docs/code-stats.svg" alt="Live Code Statistics dashboard for LoBot-LLC" width="920" height="640" />
+  <img src="docs/code-stats.svg" alt="Live Code Statistics dashboard for LoBot-LLC" width="920" height="800" />
 </p>
 
 <div align="center">

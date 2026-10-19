@@ -63,7 +63,7 @@ An animated continuous dashboard showing real-time metrics from https://github.c
 
 <!-- CODE-STATS-START -->
 <p align="center">
-  <img src="docs/code-stats.svg" alt="Live Code Statistics dashboard for LoBot-LLC" width="920" height="640" />
+  <img src="docs/code-stats.svg" alt="Live Code Statistics dashboard for LoBot-LLC" width="920" height="800" />
 </p>
 
 <div align="center">
